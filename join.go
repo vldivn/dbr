@@ -28,7 +28,7 @@ func join(t joinType, table interface{}, on interface{}) Builder {
 			buf.WriteString(placeholder)
 			buf.WriteValue(table)
 		}
-		buf.WriteString(" ON ")
+		buf.WriteString(" USING ")
 		switch on := on.(type) {
 		case string:
 			buf.WriteString(on)
