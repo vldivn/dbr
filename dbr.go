@@ -165,5 +165,6 @@ func query(runner runner, log EventReceiver, builder Builder, d Dialect, dest in
 			"sql": query,
 		})
 	}
+	fmt.Println(query)
 	return count, nil
 }
