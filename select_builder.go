@@ -179,6 +179,10 @@ func (b *SelectBuilder) OrderBy(col string) *SelectBuilder {
 	return b
 }
 
+func (b *SelectBuilder) Raw() string {
+	return b.SelectStmt.raw.Query
+}
+
 // Where adds a where condition
 func (b *SelectBuilder) Where(query interface{}, value ...interface{}) *SelectBuilder {
 	b.SelectStmt.Where(query, value...)
