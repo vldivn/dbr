@@ -215,25 +215,25 @@ func (b *SelectStmt) ForUpdate() *SelectStmt {
 }
 
 // Join joins table on condition
-func (b *SelectStmt) Join(table, on interface{}) *SelectStmt {
+func (b *SelectStmt) Join(table interface{}, on interface{}) *SelectStmt {
 	b.JoinTable = append(b.JoinTable, join(inner, table, on))
 	return b
 }
 
 // LeftJoin joins table on condition via LEFT JOIN
-func (b *SelectStmt) LeftJoin(table, on interface{}) *SelectStmt {
+func (b *SelectStmt) LeftJoin(table interface{}, on interface{}) *SelectStmt {
 	b.JoinTable = append(b.JoinTable, join(left, table, on))
 	return b
 }
 
 // RightJoin joins table on condition via RIGHT JOIN
-func (b *SelectStmt) RightJoin(table, on interface{}) *SelectStmt {
+func (b *SelectStmt) RightJoin(table interface{}, on interface{}) *SelectStmt {
 	b.JoinTable = append(b.JoinTable, join(right, table, on))
 	return b
 }
 
 // FullJoin joins table on condition via FULL JOIN
-func (b *SelectStmt) FullJoin(table, on interface{}) *SelectStmt {
+func (b *SelectStmt) FullJoin(table interface{}, on interface{}) *SelectStmt {
 	b.JoinTable = append(b.JoinTable, join(full, table, on))
 	return b
 }

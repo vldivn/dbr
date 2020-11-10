@@ -97,25 +97,25 @@ func (b *SelectBuilder) LoadValues(value interface{}) (int, error) {
 }
 
 // Join joins table on condition
-func (b *SelectBuilder) Join(table, on interface{}) *SelectBuilder {
+func (b *SelectBuilder) Join(table interface{}, on interface{}) *SelectBuilder {
 	b.SelectStmt.Join(table, on)
 	return b
 }
 
 // LeftJoin joins table on condition via LEFT JOIN
-func (b *SelectBuilder) LeftJoin(table, on interface{}) *SelectBuilder {
+func (b *SelectBuilder) LeftJoin(table interface{}, on interface{}) *SelectBuilder {
 	b.SelectStmt.LeftJoin(table, on)
 	return b
 }
 
 // RightJoin joins table on condition via RIGHT JOIN
-func (b *SelectBuilder) RightJoin(table, on interface{}) *SelectBuilder {
+func (b *SelectBuilder) RightJoin(table interface{}, on interface{}) *SelectBuilder {
 	b.SelectStmt.RightJoin(table, on)
 	return b
 }
 
 // FullJoin joins table on condition via FULL JOIN
-func (b *SelectBuilder) FullJoin(table, on interface{}) *SelectBuilder {
+func (b *SelectBuilder) FullJoin(table interface{}, on interface{}) *SelectBuilder {
 	b.SelectStmt.FullJoin(table, on)
 	return b
 }
