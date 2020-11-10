@@ -131,7 +131,7 @@ func exec(runner runner, log EventReceiver, builder Builder, d Dialect) (sql.Res
 	return result, nil
 }
 
-func query(runner runner, log EventReceiver, builder Builder, d Dialect, dest interface{}) (int, error) {
+func query(runner runner, log EventReceiver, builder Builder, d Dialect, dest interface{}) (int, error, string) {
 	i := interpolator{
 		Buffer:       newBuffer(),
 		Dialect:      d,
@@ -143,7 +143,7 @@ func query(runner runner, log EventReceiver, builder Builder, d Dialect, dest in
 		return 0, log.EventErrKv("dbr.select.interpolate", err, kvs{
 			"sql":  query,
 			"args": fmt.Sprint(value),
-		})
+		}), ""
 	}
 
 	startTime := time.Now()
@@ -157,14 +157,13 @@ func query(runner runner, log EventReceiver, builder Builder, d Dialect, dest in
 	if err != nil {
 		return 0, log.EventErrKv("dbr.select.load.query", err, kvs{
 			"sql": query,
-		})
+		}), ""
 	}
 	count, err := Load(rows, dest)
 	if err != nil {
 		return 0, log.EventErrKv("dbr.select.load.scan", err, kvs{
 			"sql": query,
-		})
+		}), ""
 	}
-	fmt.Println(query)
-	return count, nil
+	return count, nil, query
 }

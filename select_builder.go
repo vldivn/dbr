@@ -58,13 +58,13 @@ func (tx *Tx) SelectBySql(query string, value ...interface{}) *SelectBuilder {
 }
 
 // Load loads any value from query result
-func (b *SelectBuilder) Load(value interface{}) (int, error) {
+func (b *SelectBuilder) Load(value interface{}) (int, error, string) {
 	return query(b.runner, b.EventReceiver, b, b.Dialect, value)
 }
 
 // LoadStruct loads struct from query result, returns ErrNotFound if there is no result
 func (b *SelectBuilder) LoadStruct(value interface{}) error {
-	count, err := query(b.runner, b.EventReceiver, b, b.Dialect, value)
+	count, err, _ := query(b.runner, b.EventReceiver, b, b.Dialect, value)
 	if err != nil {
 		return err
 	}
@@ -76,12 +76,13 @@ func (b *SelectBuilder) LoadStruct(value interface{}) error {
 
 // LoadStructs loads structures from query result
 func (b *SelectBuilder) LoadStructs(value interface{}) (int, error) {
-	return query(b.runner, b.EventReceiver, b, b.Dialect, value)
+	count, err, _ := query(b.runner, b.EventReceiver, b, b.Dialect, value)
+	return count, err
 }
 
 // LoadValue loads any value from query result, returns ErrNotFound if there is no result
 func (b *SelectBuilder) LoadValue(value interface{}) error {
-	count, err := query(b.runner, b.EventReceiver, b, b.Dialect, value)
+	count, err, _ := query(b.runner, b.EventReceiver, b, b.Dialect, value)
 	if err != nil {
 		return err
 	}
@@ -93,7 +94,8 @@ func (b *SelectBuilder) LoadValue(value interface{}) error {
 
 // LoadValues loads any values from query result
 func (b *SelectBuilder) LoadValues(value interface{}) (int, error) {
-	return query(b.runner, b.EventReceiver, b, b.Dialect, value)
+	count, err, _ := query(b.runner, b.EventReceiver, b, b.Dialect, value)
+	return count, err
 }
 
 // Join joins table on condition
